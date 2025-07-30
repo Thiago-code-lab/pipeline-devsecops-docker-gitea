@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas - DevSecOps</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .task {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .task.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+            opacity: 0.7;
+        }
+        .task h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .task p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .task-actions {
+            margin-top: 10px;
+        }
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        .btn-success {
+            background-color: #28a745;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background: #e7f3ff;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Gerenciador de Tarefas - DevSecOps</h1>
+        
+        <div class="status">
+            <strong>Pipeline DevSecOps com Docker e Gitea</strong><br>
+            Aplicação funcionando corretamente!
+        </div>
+
+        <form method="POST" action="{{ url_for('add_task') }}">
+            <div class="form-group">
+                <label for="title">Título da Tarefa:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descrição:</label>
+                <textarea id="description" name="description" rows="3"></textarea>
+            </div>
+            <button type="submit">Adicionar Tarefa</button>
+        </form>
+
+        <h2>Lista de Tarefas</h2>
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task {% if task.completed %}completed{% endif %}">
+                    <h3>{{ task.title }}</h3>
+                    {% if task.description %}
+                        <p>{{ task.description }}</p>
+                    {% endif %}
+                    <p><small>Criado em: {{ task.created_at.strftime('%d/%m/%Y %H:%M') }}</small></p>
+                    <div class="task-actions">
+                        <a href="{{ url_for('toggle_task', task_id=task.id) }}" class="btn-small btn-{% if task.completed %}warning{% else %}success{% endif %}">
+                            {% if task.completed %}Desmarcar{% else %}Marcar como Concluída{% endif %}
+                        </a>
+                        <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn-small btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?')">
+                            Excluir
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhuma tarefa cadastrada ainda.</p>
+        {% endif %}
+    </div>
+</body>
+</html> 
