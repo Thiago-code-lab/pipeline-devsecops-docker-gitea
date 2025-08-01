@@ -1,6 +1,11 @@
-# 🛡️ Pipeline DevSecOps - Docker e Gitea
+# 🚀🔒 Pipeline DevSecOps Completo com Docker e Gitea
 
-Pipeline DevSecOps local completo com Docker, Gitea Actions e análise de vulnerabilidades. Crie um CI/CD robusto usando Docker, Gitea (self-hosted GitHub Actions), Bandit (SAST) e Trivy (SCA/DAST). Ideal para aprofundar em segurança de aplicações e automação em ambiente local, construindo um portfólio robusto sem depender da nuvem.
+[![Docker](https://img.shields.io/badge/Docker-20.10+-blue?logo=docker)](https://www.docker.com/)
+[![Gitea](https://img.shields.io/badge/Gitea-1.17+-green?logo=gitea)](https://gitea.io/)
+[![Python](https://img.shields.io/badge/Python-3.8+-yellow?logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-red)](LICENSE)
+
+**Ambiente completo de DevSecOps local** com CI/CD integrado, análise de segurança e monitoramento. Ideal para desenvolver habilidades em segurança de aplicações e automação em ambiente controlado.
 
 ## 🚀 Funcionalidades
 
@@ -175,4 +180,11 @@ Se você encontrar algum problema ou tiver dúvidas:
 
 ---
 
-**Desenvolvido com ❤️ para a comunidade DevSecOps**
+<div align="center">
+  
+**Desenvolvido com ❤️ para a comunidade DevSecOps**  
+[![Docker](https://img.shields.io/badge/Docker-Containerizado-blue?logo=docker)](https://www.docker.com/)
+[![Gitea](https://img.shields.io/badge/Gitea-Self--hosted-green?logo=gitea)](https://gitea.io/)
+[![Flask](https://img.shields.io/badge/Flask-Web_Framework-yellow?logo=python)](https://flask.palletsprojects.com/)
+
+</div>
