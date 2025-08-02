@@ -1,11 +1,12 @@
 # 🚀🔒 Pipeline DevSecOps Completo com Docker e Gitea
 
-[![Docker](https://img.shields.io/badge/Docker-20.10+-blue?logo=docker)](https://www.docker.com/)
-[![Gitea](https://img.shields.io/badge/Gitea-1.17+-green?logo=gitea)](https://gitea.io/)
-[![Python](https://img.shields.io/badge/Python-3.8+-yellow?logo=python)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-red)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-20.10+-blue.svg)](https://www.docker.com/)
+[![Gitea](https://img.shields.io/badge/Gitea-1.17+-green.svg)](https://gitea.io/)
+[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status](https://img.shields.io/badge/Status-Produção-green.svg)](#)
 
-**Ambiente completo de DevSecOps local** com CI/CD integrado, análise de segurança e monitoramento. Ideal para desenvolver habilidades em segurança de aplicações e automação em ambiente controlado.
+> **Ambiente completo de DevSecOps local** com CI/CD integrado, análise de segurança e monitoramento. Ideal para desenvolver habilidades em segurança de aplicações e automação em ambiente controlado.**
 
 ## 🚀 Funcionalidades
 
