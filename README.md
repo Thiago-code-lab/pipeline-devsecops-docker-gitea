@@ -72,7 +72,8 @@ docker-compose up --build -d
 ```
 
 ### 3. Acesse as aplicações
-- **Flask App**: http://localhost:5000
+- **Flask App**: http://localhost:5001
+- **Health Check**: http://localhost:5001/health
 - **Gitea**: http://localhost:3000
 
 ## 🔧 Configuração do Gitea
@@ -92,38 +93,47 @@ docker-compose up --build -d
 
 Execute os testes automatizados:
 ```bash
-docker-compose exec flask-app python -m pytest tests/
+docker-compose exec app python -m pytest tests/
 ```
 
 ## 🔒 Análise de Segurança
 
 ### Bandit (SAST)
 ```bash
-docker-compose exec flask-app bandit -r .
+docker-compose exec app bandit -r .
 ```
 
 ### Trivy (SCA/DAST)
 ```bash
-docker-compose exec flask-app trivy fs .
+docker-compose exec app trivy fs .
 ```
 
 ## 📁 Estrutura do Projeto
 
 ```
 pipeline-devsecops-docker-gitea/
-├── app.py                    # Aplicação Flask
+├── app/                      # Pacote principal da aplicação Flask
+│   ├── __init__.py           # App factory (create_app)
+│   ├── wsgi.py               # Ponto de entrada WSGI
+│   ├── api/                  # Blueprints da API
+│   ├── auth/                 # Autenticação
+│   ├── health/               # Healthcheck
+│   ├── static/               # Arquivos estáticos
+│   └── templates/            # Templates Jinja
+├── wsgi.py                   # Wrapper/entry (desenvolvimento)
+├── app.py                    # Script utilitário (se aplicável)
 ├── docker-compose.yml        # Orquestração dos containers
-├── Dockerfile               # Containerização da aplicação
+├── Dockerfile                # Containerização da aplicação
 ├── requirements.txt          # Dependências Python
 ├── templates/
-│   └── index.html           # Interface web
+│   └── index.html            # Interface web
 ├── tests/
-│   └── test_app.py          # Testes automatizados
+│   └── test_app.py           # Testes automatizados
 ├── .github/
 │   └── workflows/
-│       └── ci-cd.yml        # Pipeline CI/CD
-├── .gitignore               # Arquivos ignorados pelo Git
-└── README.md                # Documentação
+│       └── ci-cd.yml         # Pipeline CI/CD
+├── .gitignore                # Arquivos ignorados pelo Git
+└── README.md                 # Documentação
 ```
 
 ## 🔄 CI/CD Pipeline
@@ -167,9 +177,16 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 Se você encontrar algum problema ou tiver dúvidas:
 
-1. Verifique os logs: `docker-compose logs`
-2. Reinicie os containers: `docker-compose restart`
-3. Abra uma issue no GitHub
+1. Verifique os logs: `docker-compose logs app`
+2. Reinicie os containers: `docker-compose restart app`
+3. Cheque se a aplicação está escutando: acesse `http://localhost:5001/health`
+4. Verifique variáveis no `docker-compose.yml` para o serviço `app`:
+   - `FLASK_APP=wsgi:app`
+   - `PYTHONPATH=.`
+   - `command: flask run --host=0.0.0.0 --port=5000`
+5. Confirme o volume está montado: `.:/app`
+6. Se aparecer erro "Could not import 'wsgi'" ou "No module named wsgi", garanta que o arquivo `wsgi.py` existe em `app/wsgi.py` e que o diretório de trabalho é `/app` no container.
+7. Abra uma issue no GitHub
 
 ## 🎯 Próximos Passos
 

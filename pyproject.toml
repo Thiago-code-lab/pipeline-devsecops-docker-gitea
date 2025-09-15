@@ -1,0 +1,93 @@
+[tool.poetry]
+name = "task-manager-api"
+version = "0.1.0"
+description = "API de Gerenciamento de Tarefas com Autenticação JWT"
+authors = ["Seu Nome <seu.email@exemplo.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^2.3.3"
+flask-sqlalchemy = "^3.1.1"
+flask-migrate = "^4.0.5"
+flask-cors = "^4.0.0"
+flask-jwt-extended = "^4.5.2"
+flask-limiter = {extras = ["redis"], version = "^3.5.0"}
+psycopg2-binary = "^2.9.9"
+python-dotenv = "^1.0.0"
+gunicorn = "^21.2.0"
+email-validator = "^2.0.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
+black = "^23.7.0"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+mypy = "^1.5.1"
+bandit = "^1.7.5"
+safety = "^2.3.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["flask.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["flask_sqlalchemy.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["flask_migrate.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["flask_jwt_extended.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["flask_limiter.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["email_validator.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["jose.*"]
+ignore_missing_imports = true
